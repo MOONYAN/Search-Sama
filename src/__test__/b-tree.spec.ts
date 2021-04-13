@@ -30,3 +30,49 @@ test('level 3 increase', () => {
     }
     expect(tree.height).toEqual(3);
 })
+
+test('level 1 search inexist', () => {
+    let tree: BTree<number> = new BTree<number>(3, (a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 1 search exist', () => {
+    let tree: BTree<number> = new BTree<number>(3, (a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    expect(tree.search(2)).toEqual(true);
+})
+
+test('level 2 search inexist', () => {
+    let tree: BTree<number> = new BTree<number>(3, (a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 2 search exist', () => {
+    let tree: BTree<number> = new BTree<number>(3, (a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    expect(tree.search(2)).toEqual(true);
+})
+
+test('level 3 search inexist', () => {
+    let tree: BTree<number> = new BTree<number>(3, (a, b) => a - b);
+    for (let i = 1; i <= 7; i++) {
+        tree.insert(i);
+    }
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 3 search exist', () => {
+    let tree: BTree<number> = new BTree<number>(3, (a, b) => a - b);
+    for (let i = 0; i <= 7; i++) {
+        tree.insert(i);
+    }
+    expect(tree.search(2)).toEqual(true);
+})

@@ -20,6 +20,21 @@ export class BNode<T> {
     private get minRecord(): number {
         return this.order >>> 1;
     }
+
+    search(val: T): boolean {
+        let pos = 0;
+        while (pos < this.records.length && this.compare(val, this.records[pos]) >= 1) {
+            pos++;
+        }
+        if (this.compare(val, this.records[pos]) === 0) {
+            return true;
+        }
+        if (this.isLeaf) {
+            return false;
+        }
+        return this.children[pos].search(val);
+    }
+
     insert(val: T) {
         if (this.isLeaf) {
             this.insertToLeaf(val);
@@ -33,14 +48,14 @@ export class BNode<T> {
     }
 
     split() {
-        const pk = this.minDegree - 1;
+        const pk = this.minRecord;
         let left = new BNode<T>(this.order, this.isLeaf, this.compare);
         let right = new BNode<T>(this.order, this.isLeaf, this.compare);
 
         left.records = this.records.slice(0, pk);
         right.records = this.records.slice(pk + 1);
-        left.children = this.children.slice(0, pk + 1);
-        right.children = this.children.slice(pk + 1);
+        left.children = this.children.slice(0, this.minDegree);
+        right.children = this.children.slice(this.minDegree);
 
         this.children = [left, right];
         this.records = [this.records[pk]];

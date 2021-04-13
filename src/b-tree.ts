@@ -19,6 +19,10 @@ export class BTree<T> {
         }
     }
 
+    search(val: T): boolean {
+        return this._root.search(val);
+    }
+
     get height() {
         return this._height;
     }

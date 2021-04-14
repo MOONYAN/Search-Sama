@@ -23,7 +23,7 @@ export class BNode<T> {
 
     search(val: T): boolean {
         let pos = 0;
-        while (pos < this.records.length && this.compare(val, this.records[pos]) >= 1) {
+        while (pos < this.records.length && this.compare(val, this.records[pos]) > 0) {
             pos++;
         }
         if (this.compare(val, this.records[pos]) === 0) {

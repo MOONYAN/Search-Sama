@@ -73,9 +73,6 @@ export class BPlusInternalNode<K, T> extends BPlusNode<K, T> {
         while (pos < this.keys.length && this.compare(key, this.keys[pos]) >= 0) {
             pos++;
         }
-        if (this.compare(key, this.keys[pos]) === 0) {
-            return true;
-        }
         return this.children[pos].search(key);
     }
 

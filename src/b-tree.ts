@@ -13,7 +13,7 @@ export class BTree<T> {
     insert(val: T) {
         let node = this._root;
         node.insert(val);
-        if (node.isFull()) {
+        if (node.isOverflow()) {
             node.split();
             this._height++;
         }

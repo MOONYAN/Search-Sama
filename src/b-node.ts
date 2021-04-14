@@ -43,7 +43,7 @@ export class BNode<T> {
         }
     }
 
-    isFull(): boolean {
+    isOverflow(): boolean {
         return this.records.length === this.order;
     }
 
@@ -85,7 +85,7 @@ export class BNode<T> {
 
         this.children[pos].insert(val);
 
-        if (this.children[pos].isFull()) {
+        if (this.children[pos].isOverflow()) {
             this.children[pos].split();
             this.mergeChild(pos);
         }

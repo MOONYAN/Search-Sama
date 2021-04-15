@@ -22,6 +22,10 @@ export class BPlusTree<K, T> {
         return this._root.search(key);
     }
 
+    fetchRange(begin: K, end: K): K[] {
+        return this._root.fetchRange(begin, end);
+    }
+
     get height() {
         return this._height;
     }

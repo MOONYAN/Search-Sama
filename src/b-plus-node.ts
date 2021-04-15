@@ -12,6 +12,8 @@ export abstract class BPlusNode<K, T> {
 
     abstract search(key: K): boolean;
 
+    abstract fetchRange(begin: K, end: K): K[];
+
     isOverflow(): boolean {
         return this.keys.length === this.order;
     }
@@ -76,6 +78,14 @@ export class BPlusInternalNode<K, T> extends BPlusNode<K, T> {
         return this.children[pos].search(key);
     }
 
+    fetchRange(begin: K, end: K): K[] {
+        let pos = 0;
+        while (pos < this.keys.length && this.compare(begin, this.keys[pos]) >= 0) {
+            pos++;
+        }
+        return this.children[pos].fetchRange(begin, end);
+    }
+
     private mergeChild(pos: number) {
 
         let node = this.children[pos] as BPlusInternalNode<K, T>;
@@ -138,5 +148,23 @@ export class BPlusLeafNode<K, T> extends BPlusNode<K, T> {
             pos++;
         }
         return this.compare(key, this.keys[pos]) === 0;
+    }
+
+    fetchRange(begin: K, end: K): K[] {
+
+        let collection: K[] = [];
+
+        for (let i = 0; i < this.keys.length; i++) {
+            const k = this.keys[i];
+            if (this.compare(begin, k) > 0) {
+                continue;
+            }
+            if (this.compare(k, end) <= 0) {
+                collection.push(k);
+            } else {
+                return collection;
+            }
+        }
+        return (this.next) ? collection.concat(this.next.fetchRange(begin, end)) : collection;
     }
 }

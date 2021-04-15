@@ -99,18 +99,20 @@ export class BPlusLeafNode<K, T> extends BPlusNode<K, T> {
     split(): BPlusNode<K, T> {
 
         const pk = this.minKey;
-        let left = new BPlusLeafNode<K, T>(this.order, this.compare);
+
         let right = new BPlusLeafNode<K, T>(this.order, this.compare);
 
-        left.keys = this.keys.slice(0, pk);
         right.keys = this.keys.slice(pk);
-        left.datas = this.datas.slice(0, pk);
+        this.keys = this.keys.slice(0, pk);
+
         right.datas = this.datas.slice(pk);
-        left.next = right;
+        this.datas = this.datas.slice(0, pk);
+        
+        this.next = right;
 
         let upgrade = new BPlusInternalNode<K, T>(this.order, this.compare);
-        upgrade.children = [left, right];
-        upgrade.keys = [this.keys[pk]];
+        upgrade.children = [this, right];
+        upgrade.keys = [right.keys[0]];
 
         return upgrade;
     }

@@ -53,14 +53,6 @@ test('level 2 search inexist', () => {
     expect(tree.search(0)).toEqual(false);
 })
 
-test('level 2 search mid inexist', () => {
-    let tree: BPlusTree<number, number> = new BPlusTree<number, number>(3, (a, b) => a - b);
-    tree.insert(1, 1);
-    tree.insert(2, 2);
-    tree.insert(3, 3);
-    expect(tree.search(1.5)).toEqual(false);
-})
-
 test('level 2 search exist', () => {
     let tree: BPlusTree<number, number> = new BPlusTree<number, number>(3, (a, b) => a - b);
     tree.insert(1, 1);

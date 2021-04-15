@@ -135,9 +135,6 @@ export class BPlusLeafNode<K, T> extends BPlusNode<K, T> {
         while (pos < this.keys.length && this.compare(key, this.keys[pos]) > 0) {
             pos++;
         }
-        if (this.compare(key, this.keys[pos]) === 0) {
-            return true;
-        }
-        return (pos == this.keys.length && this.next) ? this.next.search(key) : false;
+        return this.compare(key, this.keys[pos]) === 0;
     }
 }

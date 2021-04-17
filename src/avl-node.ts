@@ -49,7 +49,7 @@ export class AVLNode<T> {
             }
             root = this.turnRight();
 
-        } else if (diff < -1) {
+        } else {
             if (this._right!.hightDiff === 1) {
                 this._right = this._right!.turnRight();
             }

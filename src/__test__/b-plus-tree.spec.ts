@@ -115,3 +115,4 @@ test('level 3 fetch mid range', () => {
     }
     expect(tree.fetchRange(2, 4)).toEqual([2, 3, 4]);
 })
+

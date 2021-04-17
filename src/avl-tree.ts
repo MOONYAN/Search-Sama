@@ -19,6 +19,10 @@ export class AVLTree<T> {
         }
     }
 
+    search(val: T): boolean {
+        return this._root ? this._root.search(val) : false;
+    }
+
     get height() {
         return (this._root) ? this._root.height : 0;
     }

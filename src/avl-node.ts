@@ -20,6 +20,20 @@ export class AVLNode<T> {
         return leftH - rightH;
     }
 
+    search(val: T): boolean {
+        const diff = this.compare(val, this.value);
+        if (diff === 0) {
+            return true;
+        }
+        else if (diff < 0 && this._left) {
+            return this._left.search(val);
+        }
+        else if (diff > 0 && this._right) {
+            return this._right.search(val);
+        }
+        return false;
+    }
+
     isUnbalance(): boolean {
         return Math.abs(this.hightDiff) > 1;
     }
@@ -84,8 +98,8 @@ export class AVLNode<T> {
         let root = this._right;
         this._right = root!._left;
         root!._left = this;
-        root!._left.updateHeight();   
-        root!.updateHeight();     
+        root!._left.updateHeight();
+        root!.updateHeight();
         return root;
     }
 

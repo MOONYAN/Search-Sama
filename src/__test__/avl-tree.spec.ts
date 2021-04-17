@@ -76,3 +76,31 @@ test('height: 2 RL', () => {
     tree.insert(1);
     expect(tree.height).toEqual(2);
 })
+
+test('level 1 search inexist', () => {
+    let tree: AVLTree<number> = new AVLTree((a, b) => a - b);
+    tree.insert(1);
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 1 search exist', () => {
+    let tree: AVLTree<number> = new AVLTree((a, b) => a - b);
+    tree.insert(1);
+    expect(tree.search(1)).toEqual(true);
+})
+
+test('level 2 search inexist', () => {
+    let tree: AVLTree<number> = new AVLTree((a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 2 search exist', () => {
+    let tree: AVLTree<number> = new AVLTree((a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    expect(tree.search(3)).toEqual(true);
+})

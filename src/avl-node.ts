@@ -15,7 +15,7 @@ export class AVLNode<T> {
         return this._height;
     }
 
-    get hightDiff(): number {
+    get balanceFactor(): number {
         const [leftH, rightH] = [this._left, this._right].map(n => n ? n._height : 0);
         return leftH - rightH;
     }
@@ -35,22 +35,22 @@ export class AVLNode<T> {
     }
 
     isUnbalance(): boolean {
-        return Math.abs(this.hightDiff) > 1;
+        return Math.abs(this.balanceFactor) > 1;
     }
 
     rotate(): AVLNode<T> | undefined {
 
-        const diff = this.hightDiff;
+        const diff = this.balanceFactor;
         let root: AVLNode<T> | undefined = this;
 
         if (diff > 1) {
-            if (this._left!.hightDiff === -1) {
+            if (this._left!.balanceFactor === -1) {
                 this._left = this._left!.turnLeft();
             }
             root = this.turnRight();
 
         } else {
-            if (this._right!.hightDiff === 1) {
+            if (this._right!.balanceFactor === 1) {
                 this._right = this._right!.turnRight();
             }
             root = this.turnLeft();

@@ -21,6 +21,20 @@ export class RBNode<T> {
         return Math.max(leftH, rightH) + 1;
     }
 
+    search(val: T): boolean {
+        const diff = this.compare(val, this.value);
+        if (diff === 0) {
+            return true;
+        }
+        else if (diff < 0 && this._left) {
+            return this._left.search(val);
+        }
+        else if (diff > 0 && this._right) {
+            return this._right.search(val);
+        }
+        return false;
+    }
+
     isUnbalance(): boolean {
         return (this._left ? this._left.isDoubleRed() : false) || (this._right ? this._right.isDoubleRed() : false);
     }

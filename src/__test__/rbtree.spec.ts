@@ -111,3 +111,31 @@ test('height: 3 LR', () => {
     tree.insert(1);
     expect(tree.height).toEqual(3);
 })
+
+
+test('level 0 search empty tree', () => {
+    let tree: RBTree<number> = new RBTree((a, b) => a - b);
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 1 search exist', () => {
+    let tree: RBTree<number> = new RBTree((a, b) => a - b);
+    tree.insert(1);
+    expect(tree.search(1)).toEqual(true);
+})
+
+test('level 2 search inexist', () => {
+    let tree: RBTree<number> = new RBTree((a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    expect(tree.search(0)).toEqual(false);
+})
+
+test('level 2 search exist', () => {
+    let tree: RBTree<number> = new RBTree((a, b) => a - b);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    expect(tree.search(3)).toEqual(true);
+})

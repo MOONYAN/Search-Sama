@@ -28,3 +28,21 @@ yarn test
 # About
 
 - LinkIn https://www.linkedin.com/in/owen-hong-469882165/
+
+# Illustrate
+
+- AVL
+
+![AVL Tree](assets/AVL-Tree.png)
+
+- Red-Black
+
+![Red-Black Tree](assets/Red-Black-Tree.png)
+
+- B Tree
+
+![B Tree](assets/B-Tree.png)
+
+- B+ Tree
+
+![B+ Tree](assets/B+Tree.png)

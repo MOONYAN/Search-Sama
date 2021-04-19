@@ -7,7 +7,8 @@
 
 # Feature
 
-- Implement binary search Tree (AVL).
+- Implement binary search Tree (AVL Tree).
+- Implement binary search Tree (RB Tree).
 - Implement m-WAY Search Trees (B Tree).
 - Implement m-WAY Search Trees (B+ Tree).
 
